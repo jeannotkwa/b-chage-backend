@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server"
 import { pool } from "@/lib/db"
 import { verifyToken } from "@/lib/auth"
-import { generateReceiptPDF } from "@/lib/pdf"
 
 // Get transactions with filters
 export async function GET(request) {
@@ -274,13 +273,13 @@ export async function POST(request) {
       // Commit transaction
       await connection.commit()
 
-      // Generate receipt PDF
+      // Instead of generating a PDF, just return the transaction data
       const transaction = {
         id: transactionId,
         type,
         cashRegisterId,
         cashierId: authResult.user.id,
-        cashierName: authResult.user.fullName,
+        cashierName: authResult.user.username,
         currencyCode,
         currencyName: currency.name,
         amount,
@@ -292,13 +291,11 @@ export async function POST(request) {
         receiptNumber,
       }
 
-      const receiptPdf = await generateReceiptPDF(transaction)
-
       return NextResponse.json(
         {
           message: "Transaction enregistrée avec succès",
           transaction,
-          receiptUrl: receiptPdf,
+          // Remove the receiptUrl property
         },
         { status: 201 },
       )

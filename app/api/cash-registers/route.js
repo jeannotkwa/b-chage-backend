@@ -136,7 +136,7 @@ export async function POST(request) {
           cashRegister: {
             id: cashRegisterId,
             cashierId: authResult.user.id,
-            cashierName: authResult.user.fullName,
+            cashierName: authResult.user.username,
             status: "open",
             initialBalances,
             currentBalances: [...initialBalances],

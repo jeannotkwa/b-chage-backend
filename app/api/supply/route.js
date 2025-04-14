@@ -147,7 +147,7 @@ export async function POST(request) {
         [
           cashRegisterId,
           authResult.user.id,
-          authResult.user.fullName,
+          authResult.user.username,
           currencyCode,
           currency.name,
           amount,
@@ -200,7 +200,7 @@ export async function POST(request) {
             id: supplyId,
             cashRegisterId,
             cashierId: authResult.user.id,
-            cashierName: authResult.user.fullName,
+            cashierName: authResult.user.username,
             currencyCode,
             currencyName: currency.name,
             amount,
