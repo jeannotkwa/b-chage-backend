@@ -62,6 +62,8 @@ export async function POST(request) {
   try {
     // Verify authentication
     const authResult = await verifyToken(request)
+    console.log('authc:',authResult);
+    
     if (!authResult.success) {
       return NextResponse.json({ error: authResult.error }, { status: authResult.status })
     }
@@ -94,7 +96,7 @@ export async function POST(request) {
       // Create new cash register
       const [result] = await connection.query(
         "INSERT INTO cash_registers (cashier_id, cashier_name, opened_at, status) VALUES (?, ?, NOW(), 'open')",
-        [authResult.user.id, authResult.user.fullName],
+        [authResult.user.id, authResult.user.username],
       )
 
       const cashRegisterId = result.insertId

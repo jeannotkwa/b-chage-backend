@@ -171,7 +171,7 @@ export async function POST(request) {
           type,
           cashRegisterId,
           authResult.user.id,
-          authResult.user.fullName,
+          authResult.user.username,
           currencyCode,
           currency.name,
           amount,

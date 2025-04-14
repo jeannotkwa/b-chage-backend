@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server"
+import { NextResponse, userAgent } from "next/server"
 import jwt from "jsonwebtoken"
 import bcrypt from "bcryptjs"
 import { pool } from "@/lib/db"
@@ -35,7 +35,9 @@ export async function POST(request) {
     try {
       // Find user
       const [users] = await connection.query("SELECT * FROM users WHERE username = ?", [username])
-
+      console.log('user', users);
+      console.log('len',users.length);
+      
       if (users.length === 0) {
         return NextResponse.json(
           { error: "Identifiants invalides" },
@@ -57,7 +59,7 @@ export async function POST(request) {
 
       if (!isPasswordValid) {
         return NextResponse.json(
-          { error: "Identifiants invalides" },
+          { error: "Identifiants invalides ou mot de passe incorect" },
           {
             status: 401,
             headers: {

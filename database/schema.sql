@@ -138,7 +138,7 @@ CREATE TABLE IF NOT EXISTS counters (
 -- Insertion d'un utilisateur administrateur par défaut
 -- Mot de passe: admin123 (haché avec bcrypt)
 INSERT INTO users (username, password, full_name, role, created_at)
-VALUES ('admin', '$2a$10$JNVNvMRIUkZ1YXVVZ1dXOeU.U.K9XC4KlL9Vv.XyJGIvkAYkwmJyW', 'Administrateur', 'admin', NOW());
+VALUES ('admin', '$2b$10$wJXGvOZ3Jc3c6EcLxW0MuOBPu6u2XyfwcCR7I9StkKkZxZuvTAslK', 'Administrateur', 'admin', NOW());
 
 -- Insertion de quelques devises par défaut
 INSERT INTO currencies (code, name, symbol, buy_rate, sell_rate, is_active, created_at, created_by, updated_at, updated_by)
